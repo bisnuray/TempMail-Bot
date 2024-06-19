@@ -31,7 +31,7 @@ Before you begin, ensure you have met the following requirements:
 
 ## Installation
 
-To install Squid and necessary utilities, run the following commands:
+To install necessary utilities, run the following commands:
 
 ```bash
 pip install beautifulsoup4
