@@ -8,7 +8,7 @@ import string
 import hashlib
 import requests
 from bs4 import BeautifulSoup
-from pyrogram.enums import ParseMode
+from pyrogram.enums import ParseMode, ChatType
 from pyrogram import Client, filters
 
 from pyrogram.types import (
@@ -137,6 +137,10 @@ async def start(client, message):
 
 @bot.on_message(filters.command('tmail'))
 async def generate_mail(client, message):
+    if message.chat.type != ChatType.PRIVATE:
+        await message.reply("**Please use this bot in private chat only.**")
+        return
+
     loading_msg = await message.reply("**Generating your temporary email...**")
 
     args_text = message.text.split(maxsplit=1)[1] if len(message.text.split()) > 1 else ""
@@ -266,6 +270,9 @@ async def read_message(client, callback_query):
 
 @bot.on_message(filters.command('cmail'))
 async def manual_check_mail(client, message):
+    if message.chat.type != ChatType.PRIVATE:
+        await message.reply("**Please use this bot in private chat only.**")
+        return
 
     loading_msg = await message.reply("**⏳ Checking Mails.. Please wait.**")
 
